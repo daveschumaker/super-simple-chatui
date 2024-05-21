@@ -119,12 +119,17 @@ function App() {
                   dangerouslySetInnerHTML={{
                     __html: message.content.replace(/\n/g, '<br />')
                   }}
+                  style={{
+                    wordBreak: 'break-all'
+                  }}
                 />
               )}
             </div>
-            <div className="text-xs">
-              {new Date(message.timestamp).toLocaleString()}
-            </div>
+            {message.timestamp && (
+              <div className="text-xs">
+                {formatTimestamp(message.timestamp)}
+              </div>
+            )}
           </div>
         ))}
       </div>
