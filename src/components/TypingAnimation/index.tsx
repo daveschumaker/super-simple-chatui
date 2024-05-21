@@ -1,3 +1,4 @@
+// Modified from: https://codepen.io/matthewfortier/pen/JNQwGQ
 import './typingAnimation.css'
 
 export default function TypingAnimation() {
