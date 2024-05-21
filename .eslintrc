@@ -7,7 +7,7 @@
     "plugin:react-hooks/recommended",
     "react-app"
   ],
-  "ignorePatterns": ["dist", ".eslintrc.cjs"],
+  "ignorePatterns": ["dist", ".eslintrc", "tailwind.config.js"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["react-refresh"],
   "rules": {
