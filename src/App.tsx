@@ -1,12 +1,13 @@
 import { useCallback, useState } from 'react'
 import ReactTextareaAutosize from 'react-textarea-autosize'
 import { IconSend } from '@tabler/icons-react'
-import ollama from 'ollama/browser'
 
 import Button from './components/Button'
 import useConversation from './hooks/useConversation'
 import { calcTokenUsage } from './utils/textUtils'
 import TypingAnimation from './components/TypingAnimation'
+import { ollamaApiCall } from './api/ollama'
+import { formatTimestamp } from './utils/numberUtils'
 import './App.css'
 
 function App() {
@@ -19,34 +20,29 @@ function App() {
     async (input: string) => {
       setPendingResponse(true)
       let responseMessage = ''
-      const message = { role: 'user', content: input }
 
-      updateConversation({
-        role: 'assistant',
-        content: '',
-        timestamp: Date.now(),
-        streamingResponse: true
-      })
 
       // Hack to force state update inside updateConversation to next tick
-      setTimeout(() => {}, 0)
+      setTimeout(() => {}, 500)
 
-      const response = await ollama.chat({
-        model: 'mistral',
-        messages: [message],
-        stream: true
-      })
-
-      for await (const part of response) {
-        responseMessage += part.message.content
+      await ollamaApiCall(input, () => {
+        setPendingResponse(false)
+        responseMessage += input
 
         updateConversation({
           role: 'assistant',
           content: responseMessage,
-          timestamp: Date.now(),
+          timestamp: null,
           streamingResponse: true
         })
-      }
+      })
+
+      updateConversation({
+        role: 'assistant',
+        content: responseMessage,
+        timestamp: Date.now(),
+        streamingResponse: true
+      })
     },
     [updateConversation]
   )
