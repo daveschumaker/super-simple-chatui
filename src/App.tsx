@@ -5,17 +5,19 @@ import ollama from 'ollama/browser'
 
 import Button from './components/Button'
 import useConversation from './hooks/useConversation'
-import './App.css'
 import { calcTokenUsage } from './utils/textUtils'
 import TypingAnimation from './components/TypingAnimation'
+import './App.css'
 
 function App() {
   // const [response, setResponse] = useState('')
   const [userInput, setUserInput] = useState('')
   const [updateConversation, conversation] = useConversation()
+  const [pendingResponse, setPendingResponse] = useState(false)
 
   const sendMessage = useCallback(
     async (input: string) => {
+      setPendingResponse(true)
       let responseMessage = ''
       const message = { role: 'user', content: input }
 
@@ -101,15 +103,24 @@ function App() {
         {calcTokenUsage('user', userInput) === 1 ? 'token' : 'tokens'}
       </div>
       <div className="flex flex-col gap-4 w-full">
+        {pendingResponse && (
+          <div className={`flex flex-col w-full gap-1 pl-[40%] items-end`}>
+            <div
+              className={`flex flex-row gap-2 text-left text-sm rounded-md p-2.5 bg-gray-600 text-white`}
+            >
+              <TypingAnimation />
+            </div>
+          </div>
+        )}
         {conversation.map((message) => (
           <div
             className={`flex flex-col w-full gap-1
-            ${message.role === 'assistant' ? 'pl-[40%] items-end' : 'pr-[40%] items-start'}
+            ${message.role === 'assistant' ? 'pl-[20%] md:pl-[40%] items-end' : 'pr-[20%] md:pr-[40%] items-start'}
             `}
             key={message.timestamp}
           >
             <div
-              className={`flex flex-row gap-2 text-left text-sm rounded-md p-2.5 w-full
+              className={`flex flex-row gap-2 text-left text-sm rounded-md p-2.5
                 ${message.role === 'assistant' ? 'bg-gray-600 text-white' : 'bg-blue-500 text-white'}`}
             >
               {!message.content ? (
