@@ -4,10 +4,9 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react-hooks/recommended",
-    "react-app"
+    "plugin:react-hooks/recommended"
   ],
-  "ignorePatterns": ["dist", ".eslintrc", "tailwind.config.js"],
+  "ignorePatterns": ["dist", ".eslintrc"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["react-refresh"],
   "rules": {
