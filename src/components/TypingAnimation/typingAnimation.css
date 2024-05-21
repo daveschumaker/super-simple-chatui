@@ -1,0 +1,67 @@
+.typing {
+  display: block;
+  width: 60px;
+  height: 20px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  display: block;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: #8d8d8d;
+  margin: 3px;
+}
+
+.circle.scaling {
+  animation: typing 800ms ease-in-out infinite;
+  animation-delay: 2400ms;
+}
+
+@keyframes typing {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.circle:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.circle:nth-child(2) {
+  animation-delay: 233ms;
+}
+
+.circle:nth-child(3) {
+  animation-delay: 566ms;
+}
+
+@keyframes typing {
+  0% {
+    transform: scale(1);
+  }
+
+  33% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.4);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
