@@ -1,0 +1,27 @@
+.modal {
+  background-color: black;
+  border-radius: 8px;
+  margin: 0 auto;
+  max-width: 640px;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.modal-content {
+  background-color: black;
+  color: white;
+  min-width: 200px;
+  padding: 1.5rem 0;
+  width: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  .modal {
+    background-color: white;
+  }
+
+  .modal-content {
+    background-color: white;
+    color: black;
+  }
+}
