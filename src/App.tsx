@@ -9,6 +9,7 @@ import TypingAnimation from './components/TypingAnimation'
 import { ollamaApiCall } from './api/ollama'
 import { formatTimestamp } from './utils/numberUtils'
 import './App.css'
+import Header from './components/Header'
 
 function App() {
   // const [response, setResponse] = useState('')
@@ -67,10 +68,7 @@ function App() {
   return (
     <div className="flex flex-col gap-1 w-full" id="header">
       <div className="mb-4 sticky top-0 bg-inherit py-2 gap-2 flex flex-col">
-        <h1 className="flex flex-row gap-2 items-center justify-center md:font-[32px]">
-          <img src="/chat.png" width="48" />
-          Super Simple ChatUI ™
-        </h1>
+        <Header />
         <div className="flex flex-row gap-2 items-end">
           <ReactTextareaAutosize
             id="message"
