@@ -1,35 +1,73 @@
-# React + TypeScript + Vite
+# Super Simple ChatUI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Super Simple ChatUI Screenshot](/docs/screenshot.png)
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+_Super Simple ChatUI_ is a React/TypeScript project that provides a simple and intuitive frontend UI for interacting with a local LLM (Large Language Model) on through [Ollama](https://github.com/ollama/ollama). This project enables users to interact with their own LLMs locally, ensuring privacy and control over their data.
 
-## Expanding the ESLint configuration
+This project was setup using [Vite](https://vitejs.dev/), which allows for rapid development thanks to features like Hot Module Replacement, support for TypeScript, CSS modules and more.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
 
-- Configure the top-level `parserOptions` property like this:
+### Prerequisites
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname
-  }
-}
+- Node (v18.17.0 or later)
+- Ollama
+
+### Steps
+
+1. Clone the repository
+
+```bash
+> git clone https://github.com/daveschumaker/super-simple-chatui.git
+> cd super-simple-chatui
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Install dependencies
 
-## Attributions
+```bash
+> npm install
+```
 
-Chat logo / favicon via Flaticon:
-[Bubble Chat free icon](https://www.flaticon.com/free-icon/chat_9356600)
+3. Run development server
+
+```bash
+> npm run dev
+```
+
+4. Access application by visiting the link in your terminal (I believe Vite uses: [http://localhost:5173](http://localhost:5173))
+
+### Usage
+
+1. Ensure that Ollama is running on your machine and exposes its API at: `http://localhost:11434`
+2. Interact with LLM: Use the super-simple-chatui interface to send queries to Ollama and receive responses.
+
+## TODOs
+
+- Add support for IndexedDb via Dexie (longer term storage for conversations, system prompts, various settings, etc)
+- Add support for picking from available models via Ollama
+- Add support for chatting with models via the [AI Horde](https://horde.koboldai.net/)
+- Add support for OpenAI's ChatGPT API via API key
+- Write tests! Always with the tests.
+
+### Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature-branch).
+3. Make your changes.
+4. Commit your changes (git commit -m 'Add new feature').
+5. Push to the branch (git push origin feature-branch).
+6. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](/LICENSE) file for details.
+
+## Acknowledgments
+
+- Chat logo / favicon via Flaticon: [Bubble Chat free icon](https://www.flaticon.com/free-icon/chat_9356600)
+- [Ollama](https://github.com/ollama/ollama)
+- [Vite](https://vitejs.dev/)
