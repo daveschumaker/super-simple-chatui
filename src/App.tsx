@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import ReactTextareaAutosize from 'react-textarea-autosize'
-import { IconSend } from '@tabler/icons-react'
+import { IconMessages, IconSend } from '@tabler/icons-react'
 
 import Button from './components/Button'
 import useConversation from './hooks/useConversation'
@@ -10,6 +10,10 @@ import { ollamaApiCall } from './api/ollama'
 import { formatTimestamp } from './utils/numberUtils'
 import './App.css'
 import Header from './components/Header'
+import NiceModal from '@ebay/nice-modal-react'
+import Modal from './components/Modal'
+
+NiceModal.register('modal', Modal)
 
 function App() {
   // const [response, setResponse] = useState('')
@@ -20,11 +24,17 @@ function App() {
 
   const sendMessage = useCallback(
     async (input: string) => {
+      if (!input.trim()) return
+
       setPendingResponse(true)
       let responseMessage = ''
-      console.log(`conversationContext`, conversationContext())
+      const ollamaInput = conversationContext()
+        ? conversationContext() + `\nuser: ${input}`
+        : `user: ${input}`
 
-      await ollamaApiCall(input, async (part: string) => {
+      console.log(`ollamaInput`, ollamaInput)
+
+      await ollamaApiCall(ollamaInput, async (part: string) => {
         setPendingResponse(false)
         responseMessage += part
 
@@ -45,12 +55,14 @@ function App() {
         streamingResponse: true
       })
     },
-    [updateConversation]
+    [conversationContext, updateConversation]
   )
 
   const handleEnterKeyDown = useCallback(
     async (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (event.key === 'Enter' && !event.shiftKey) {
+        if (!userInput.trim()) return
+
         event.preventDefault()
         await updateConversation({
           role: 'user',
