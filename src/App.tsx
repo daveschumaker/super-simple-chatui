@@ -82,6 +82,8 @@ function App() {
           />
           <Button
             onClick={async () => {
+              if (!userInput.trim()) return
+
               await updateConversation({
                 role: 'user',
                 content: userInput,
@@ -112,6 +114,12 @@ function App() {
             >
               <TypingAnimation />
             </div>
+          </div>
+        )}
+        {conversation.length === 0 && (
+          <div className="h-[70vh] w-full flex flex-col gap-2 items-center justify-center">
+            <IconMessages size={36} stroke={1.5} />
+            <div>Waiting for your first message</div>
           </div>
         )}
         {conversation.map((message) => (
